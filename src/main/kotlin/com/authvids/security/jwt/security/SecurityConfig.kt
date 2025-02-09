@@ -2,6 +2,10 @@ package com.authvids.security.jwt.security
 
 import com.authvids.security.jwt.filter.JwtAuthorizationFilter
 import com.authvids.security.jwt.repository.UserRepository
+import com.nimbusds.jose.JWSAlgorithm
+import com.nimbusds.jose.jwk.JWKSet
+import com.nimbusds.jose.jwk.KeyUse
+import com.nimbusds.jose.jwk.RSAKey
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -15,6 +19,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.DefaultSecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import java.security.KeyPair
+import java.security.KeyPairGenerator
+import java.security.interfaces.RSAPublicKey
 
 @Configuration
 class SecurityConfig {
@@ -33,6 +40,21 @@ class SecurityConfig {
               it.setUserDetailsService(userDetailsService(userRepository))
               it.setPasswordEncoder(encoder())
           }
+
+    @Bean
+    fun jwkSet(): JWKSet {
+        val builder = RSAKey.Builder(keyPair().public as RSAPublicKey)
+            .keyUse(KeyUse.SIGNATURE)
+            .algorithm(JWSAlgorithm.RS256)
+            .keyID("bael-key-id")
+        return JWKSet(builder.build())
+    }
+
+    fun keyPair(): KeyPair {
+        val keyPairGenerator = KeyPairGenerator.getInstance("RSA")
+        keyPairGenerator.initialize(2048)
+        return keyPairGenerator.generateKeyPair()
+    }
 
     @Bean
     fun securityFilterChain(
