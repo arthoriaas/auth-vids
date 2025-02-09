@@ -66,7 +66,7 @@ class SecurityConfig {
           .csrf { it.disable() }
           .authorizeHttpRequests {
               it
-                .requestMatchers("/api/auth", "/api/auth/refresh", "/error")
+                .requestMatchers("/api/auth", "/api/auth/refresh", "/error", "/.well-known/jwks.json")
                 .permitAll()
                 .anyRequest()
                 .fullyAuthenticated()
