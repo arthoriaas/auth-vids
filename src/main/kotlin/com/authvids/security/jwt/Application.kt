@@ -6,9 +6,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 @EnableWebSecurity
 @SpringBootApplication
-class JwtApplication
+class Application
 
 fun main(args: Array<String>) {
-    runApplication<JwtApplication>(*args)
+    runApplication<Application>(*args)
 }
 

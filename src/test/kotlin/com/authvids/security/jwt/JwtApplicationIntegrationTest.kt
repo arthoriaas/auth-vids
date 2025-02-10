@@ -26,7 +26,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-@SpringBootTest(classes = [JwtApplication::class])
+@SpringBootTest(classes = [Application::class])
 @AutoConfigureMockMvc
 @TestPropertySource("classpath:application-test.properties")
 class JwtApplicationIntegrationTest {

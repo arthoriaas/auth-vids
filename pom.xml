@@ -91,7 +91,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.authvids.security.jwt.JwtApplication</mainClass>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.authvids.security.jwt.Application</mainClass>
+                        </manifest>
+                    </archive>
+                    <layout>JAR</layout>
                 </configuration>
             </plugin>
 
@@ -112,7 +118,7 @@
                                 <source>${project.basedir}/src/main/kotlin</source>
                                 <source>${project.basedir}/target/generated-sources/annotations</source>
                             </sourceDirs>
-                            <jvmTarget>17</jvmTarget> <!-- Especificar o alvo JVM 17 -->
+                            <jvmTarget>17</jvmTarget> <!-- Specify JVM target 17 -->
                         </configuration>
                     </execution>
                 </executions>
@@ -141,5 +147,6 @@
         <kotlin.version>1.9.25</kotlin.version>
         <spring.boot.version>3.4.2</spring.boot.version>
         <jwt.version>0.11.5</jwt.version>
+        <start-class>com.authvids.security.jwt.Application</start-class>
     </properties>
 </project>
