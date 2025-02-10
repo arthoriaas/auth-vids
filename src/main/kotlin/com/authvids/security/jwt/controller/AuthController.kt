@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 class AuthController(
     private val authenticationService: com.authvids.security.jwt.service.AuthenticationService
 ) {
+    
     @PostMapping
     fun authenticate(
         @RequestBody authRequest: AuthenticationRequest
