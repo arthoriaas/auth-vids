@@ -10,8 +10,8 @@ RUN mvn dependency:go-offline -B
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Use the official OpenJDK image to run the application
-FROM openjdk:17-jdk-slim
+# Use a smaller base image for the runtime
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
 # Copy the built jar file from the build stage
